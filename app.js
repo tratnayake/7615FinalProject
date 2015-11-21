@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -24,6 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+// app.post('/profile', upload.single('avatar'), function (req, res, next) {
+//   // req.file is the `avatar` file
+//   console.log(req.file)
+//   // req.body will hold the text fields, if there were any
+// })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

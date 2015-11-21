@@ -1,11 +1,418 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Stega-Yes-Graphy!</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+        <!-- Custom Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+        <!-- Plugin CSS -->
+        <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body id="page-top">
+
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top">Stega-Yes-Graphy!</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="#about">About</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#services">Services</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#stegoService">Steganography</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <header>
+            <div class="header-content">
+                <div class="header-content-inner">
+                    <h1>Stega-Yes-Graphy!</h1>
+                    <hr>
+                    <p>Steganography with a super fun twist that will have you saying "YES!" every time.</p>
+                    <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="bg-primary" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <h2 class="section-heading">We've got what you need!</h2>
+                        <hr class="light">
+                        <p class="text-faded">Keep what's private, private! We cover all your needs for secret communications with your mistress through the means of a image medium.</p>
+                        <p class="text-faded">The web application is essentially a chatroom, but instead of text being used to communicate, we hide the data within images so third parties are not able to directly view your conversations.</p>
+                        <a href="#steganography" class="btn btn-default btn-xl page-scroll">Get Started!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">At Your Service</h2>
+                        <hr class="primary">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="service-box">
+                            <i class="fa fa-4x fa-picture-o wow bounceIn text-primary"></i>
+                            <h3>Steganography</h3>
+                            <p class="text-muted">Your messages are hidden within an image medium.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="service-box">
+                            <i class="fa fa-4x fa-eye wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                            <h3>Low Key</h3>
+                            <p class="text-muted">Doesn't bring much attention to itself - it's just a picture!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="service-box">
+                            <i class="fa fa-4x fa-lock wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                            <h3>Security</h3>
+                            <p class="text-muted">Your messages are encrypted using AES before being hidden within the image.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="service-box">
+                            <i class="fa fa-4x fa-quote-left wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                            <i class="fa fa-4x fa-quote-right wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                            <h3>Chatroom</h3>
+                            <p class="text-muted">Able to both send and receive messages to your partner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="no-padding" id="stegoService">
+            <div class="container-fluid">
+                <div class="row no-gutter">
+                    <aside class="bg-dark">
+                        <div class="container text-center">
+                            <div class="call-to-action">
+                                <h2>Start using Stego-Yes-Graphy!</h2>
+                                <hr class="primary">
+                                <!-- Encryption or Decryption Choice -->
+                                <section id="choice" style="padding-bottom: 10px; padding-top: 10px">
+                                  <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <h2 class="section-heading">Would you like to encrypt or decrypt?</h2>
+                                        </div>
+                                        <div class="col-sm-offset-3 col-sm-3 text-center" style="padding-top: 10px">
+                                          <button id="encrypt" class="btn btn-success wow tada">Encryption</button>
+                                        </div>
+                                        <div class="col-sm-3 text-center" style="padding-top: 10px">
+                                          <button id="decrypt" class="btn btn-danger wow tada">Decryption</button>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </section>
+
+                                <!-- ENCRYPTION -->
+                                <section id="steganography" style="padding-bottom: 10px; padding-top: 10px;">
+                                    <div id="encryption" class="container hidden">
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center">
+                                                <h2 class="section-heading">Encryption of Message</h2>
+                                            </div>
+                                            <!-- Form -->
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="msg">Message:</label>
+                                                    <div class="col-sm-10">       
+                                                        <textarea class="form-control" rows="5" id="msg" placeholder="Enter the message you wish to hide."></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="key">Encryption Key:</label>
+                                                    <div class="col-sm-10">          
+                                                        <input type="password" class="form-control" id="encKey" placeholder="Enter encryption key.">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div>
+                                                <label class="control-label col-sm-2" for="img">Select image to stego:</label>
+                                                <input type="file" id="image">
+                                            </div>
+                                            <!-- Check Button -->
+                                            <div class="col-sm-12">
+                                                <button id="encryptionBtn" class="btn btn-default">Encrypt Image</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- DECRYPTION -->
+                                    <div id="decryption" class="container hidden">
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center">
+                                                <h2 class="section-heading">Decryption of Message</h2>
+                                            </div>
+                                             <!-- Form -->
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-2" for="key">Decryption Key:</label>
+                                                    <div class="col-sm-10">          
+                                                        <input type="password" class="form-control" id="decKey" placeholder="Enter decryption key.">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div>
+                                                <label class="control-label col-sm-2" for="img">Selected stego image:</label>
+                                                <input type="file" id="image">
+                                            </div>
+                                            <!-- Submit Button -->
+                                            <div class="col-sm-12">
+                                                <button id="decryptionBtn" class="btn btn-default">Decrypt Image</button>
+                                            </div>
+                                            <div>
+                                                <div id="decryptMsg" class="form-group hidden">
+                                                    <label class="control-label col-sm-2">Decrypted Message:</label>
+                                                    <div class="col-sm-10 text-left">
+                                                        <p id="decryptCiphertext" class="form-control-static"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <h2 class="section-heading">Let's Get In Touch!</h2>
+                        <hr class="primary">
+                        <p>If you want to complain that you still got caught cheating on your wife despite using pictures as a communication medium through our web application - do NOT contact us.</p>
+                        <p>Not going to complain? Great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-2 text-center">
+                        <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                        <p>240-373-4163</p>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                        <p><a href="mailto:stephenharperfan1@gmail.com">Stephenharperfan1@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="js/jquery.fittext.js"></script>
+        <script src="js/wow.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="js/creative.js"></script>
+
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                $("#encrypt").on("click", function() {
+                  $("#encryption").removeClass('hidden');
+                  $("#decryption").addClass('hidden');
+                });
+                
+                $("#decrypt").on("click", function() {
+                  $("#decryption").removeClass('hidden');
+                  $("#encryption").addClass('hidden');
+                });
+                
+                $( "#encryptionBtn" ).on( "click", function() {
+                    var msg = document.getElementById("msg").value;
+                    var key = document.getElementById("encKey").value;
+
+                    var msgLength = msg.length;
+
+                    $.post( "/stego/initial", { embedType:"Text", embedSize:msgLength }, function( data ) {
+
+                        obj = JSON.parse(data);
+                        var reqSize = obj.coverImageSizeReq;
+                        console.log("The req size is " + reqSize)
+                        
+                        if (!window.FileReader) {
+                            window.alert("The file API isn't supported on this browser yet.");
+                            return;
+                        }
+                    
+                        input = document.getElementById('image');
+                        if (!input) {
+                            window.alert("We couldn't find the fileinput element.");
+                        }
+                        else if (!input.files) {
+                            window.alert("This browser doesn't seem to support the `files` property of file inputs.");
+                        }
+                        else if (!input.files[0]) {
+                            window.alert("Please select a file before clicking 'Load'");
+                        }
+                        else {
+                            file = input.files[0];
+                            fileSize = file.size;
+                        }
+                        
+                        if(fileSize >= reqSize){
+                            //IDEA 2
+                            var formData = new FormData()
+                            formData.append("avatar",file);
+                            //Use append to add all the other relevant info (e.g. name etc)
+                            formData.append("msg",msg);
+                            formData.append("encryptionKey",key);
+                            var request = new XMLHttpRequest();
+                             //Pre-define how to handle responses
+                            request.onreadystatechange = function()
+                            {
+                                if (request.readyState == 4 && request.status == 200)
+                                {
+                                    var response = JSON.parse(request.responseText);
+                                    console.log(response)
+                                    
+                                    var img = new Image();
+                                    //Get the dimensions of the image that is sent back 
+                                    //in order to get the dimensions for the img tag
+                                    img.onload = function() {
+                                        imgWidth = this.width;
+                                        imgHeight = this.height;
+                                        
+                                        var imgHTML = document.createElement("img");
+                                        imgHTML.src = img.src;
+                                        imgHTML.width = imgWidth;
+                                        imgHTML.height = imgHeight;
+                                        imgHTML.alt = "Stego Image";
+                                    
+                                        var brTag = document.createElement("br");
+                                        
+                                        document.getElementById('encryption').appendChild(brTag);
+                                        document.getElementById('encryption').appendChild(imgHTML);
+                                    }
+                                    
+                                    //Load the image at the returned path (for the dimensions)
+                                    img.src = response.stegodImage;
+                                }
+                            }; 
+                            request.open("POST","stego/text/uploadCover")
+                            request.send(formData)
+
+                        }
+                        else{
+                            window.alert("The minimum required size of the image is: " + reqSize + " bytes. Please try again.");                            
+                        }
+                    });
+                });
+
+                $("#decryptionBtn").on("click", function() {
+                    if (!window.FileReader) {
+                        window.alert("The file API isn't supported on this browser yet.");
+                        return;
+                    }
+                
+                    input = document.getElementById('image');
+                    if (!input) {
+                        window.alert("We couldn't find the fileinput element.");
+                    }
+                    else if (!input.files) {
+                        window.alert("This browser doesn't seem to support the `files` property of file inputs.");
+                    }
+                    else if (!input.files[0]) {
+                        window.alert("Please select a file before clicking 'Load'");
+                    }
+                    else {
+                        file = input.files[0];
+                        var key = document.getElementById("decKey").value;
+                    
+                        var formData = new FormData()
+                        formData.append("avatar",file);
+                        //Use append to add all the other relevant info (e.g. name etc)
+                        formData.append("decryptionKey",key);
+                        var request = new XMLHttpRequest();
+                        //Pre-define how to handle responses
+                        request.onreadystatechange = function() {
+                            if (request.readyState == 4 && request.status == 200) {
+                                var response = JSON.parse(request.responseText);
+                                console.log(response)
+                                
+                                $("#decryptMsg").removeClass('hidden');
+                                $('#decryptCiphertext').append(response.text);
+                            }
+                        }
+                    }
+                    //REQUIRES CHANGE OF POST DESTINATION!
+                    request.open("POST","stego/decrypt")
+                    request.send(formData)
+                });
+                
+            });
+        </script>
+
+    </body>
+
 </html>
