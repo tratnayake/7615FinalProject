@@ -12,6 +12,11 @@ var users = require('./routes/users');
 
 var app = express();
 
+//socketIO stuff
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(80);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -26,6 +31,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+io.on('connection', function (socket) {
+  console.log("A USER CONNECTED!")
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
+  });
+});
+
+
+
 
 // app.post('/profile', upload.single('avatar'), function (req, res, next) {
 //   // req.file is the `avatar` file

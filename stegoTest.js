@@ -1,4 +1,5 @@
-
+//This file is just for testing code. Test completely here then migrate to
+//stego.js
 
 //Dependancies
 var path = require('path');
@@ -184,11 +185,17 @@ function stegoImage(coverImagePath,embedData){
     })
 }
 
-module.exports = function(coverImagePath){
+function destegoImage(coverImagePath){
      imageToBits(coverImagePath)
     .then(grabHeader)
     .then(grabData)
-}
+
+
+// module.exports = function(coverImagePath){
+//      imageToBits(coverImagePath)
+//     .then(grabHeader)
+//     .then(grabData)
+// }
 
 function grabHeader(binaryString){
     return new Promise(function(resolve,reject){
@@ -239,6 +246,6 @@ function imageToBits(coverImagePath){
     })
 }
 //stegoText("embedImages/coverImage.bmp", "testing testing testing");
-this.destegoImage("./stegodImages/test.bmp");
+//this.destegoImage("./stegodImages/test.bmp");
 
 

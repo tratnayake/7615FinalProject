@@ -1,47 +1,70 @@
+////////////////////////////////////////////////////////////////////////////////
+// Authors: Thilina Ratnayake & Justin Tom
+// Course: COMP 7615 - BCIT 2015
+// Purpose: Stego.js handles all the stegonography elements of the "Stego- \
+// yes-graphy" web application
+////////////////////////////////////////////////////////////////////////////////
+
+
+//Dependancies
 var zfill = require('zfill')
 var path = require('path');
 var fs = require('fs')
 var Jimp = require('jimp')
 var ayb = require('all-your-base')
+var crypto = require('crypto')
+var algorithm = 'aes-256-ctr'
     //Calculates the minimum size required of cover image to fit this file into 
     //image. Assumed to be using file format with 3 color channels 
     // (No ALPHA)
+    
+//Calculates the minimum size required for a given text string    
 module.exports.calculateMinSize = function(type, embedSize) {
     //   if(type == "text"){
     //The cover file has to be big enough to handle the data + the header
     var headerLength = this.calculateHeaderLength("text", embedSize);
-    // console.log("Header length is " + headerLength);
-    // console.log("Embed Size " + embedSize);
-    // console.log("Header Length" + headerLength)
-    // console.log("Together " + parseInt(headerLength) + parseInt(embedSize))
     var minimumReq = (embedSize + headerLength) / 3;
     return minimumReq;
     //}
 
 }
 
+//Calculates the header length.
 module.exports.calculateHeaderLength = function(type, embedSize) {
     if (type == "text") {
         return stringToBinary("text" + "\n" + embedSize).length;
     }
 }
 
+//The main stego task runner. 
 module.exports.stego = function(req, res) {
     var object = new Object();
     object.req = req;
     object.res = res;
     this.stegoText(object)
         .then(stegoImage)
-        .then(sendResponse)
+        .then(sendResponseStego)
 
 }
 
+//The actual stegonography takes place here.
+// Order is:
+//1. Encryption
+//2. Crafting the header
+//3. Converting the message to binary
+//4. then stegoImage (which does the image manipulation)
 module.exports.stegoText = function(object) {
     console.log("Inside stegoText");
     //coverImage
     var coverImage = object.req.writeFilePath;
     //embedText
     var embedText = object.req.body.msg
+    
+    
+    //ENCRYPTION HERE
+    var password = object.req.body.encryptionKey;
+    var embedText = encrypt(embedText,password);
+    
         //outputFileName
     var outputFileName = object.req.newFileName + "." + object.req.fileExtension,
         res
@@ -75,12 +98,20 @@ module.exports.stegoText = function(object) {
             object.embedText = embedText;
             object.outputFileName = outputFileName;
             object.embedData = embedData;
+            
+            //Send a response
+            //object.res.write(JSON.stringify({loadingMessage: "StegoText done!"}))
             // console.log("Object ready, resolving")
             resolve(object);
         }
     })
 }
 
+
+//Image manipulation portion of stegonography.
+//Cont'd
+//5.For every bit in the data that needs to be embed, changes the LSB of every
+//pixel
 function stegoImage(object) {
     console.log("Inside stegoImage")
     return new Promise(function(resolve, reject) {
@@ -131,9 +162,9 @@ function stegoImage(object) {
                     //console.log(embedData.length + " bits to flip")
                     //console.log(counter + " bits flipped")
                         //Write image out
-                    image.write("./stegodImages/" + outputFileName);
+                    image.write("./public/downloads/" + outputFileName);
                     //console.log("\n IMAGE WRITTEn, NOW TO SEND THE RESPONSE BACk")
-                    object.outputFileName = "./stegodImages/" + outputFileName
+                    object.outputFileName = "/downloads/" + outputFileName
                     resolve(object);
                 })
             }
@@ -143,7 +174,9 @@ function stegoImage(object) {
 
 }
 
-function sendResponse(object) {
+
+//Crafts the response that should be sent back to the client for stego
+function sendResponseStego(object) {
     var response = new Object();
     response.message = "Steganography done!"
     response.stegodImage = object.outputFileName
@@ -151,9 +184,48 @@ function sendResponse(object) {
     object.res.send(JSON.stringify(response));
 }
 
+//Crafts the response that should be sent back to the client for destego
+function sendResponseDestego(object){
+    var response = new Object();
+    response.message = "DeSteganography done!"
+    response.plaintext = object.req.data
+    console.log("Response to send back to the client" + JSON.stringify(response));
+    object.res.send(JSON.stringify(response));
+}
+
+
+//The main destegongraphy task runner
+module.exports.destego = function(req,res){
+     var object = new Object();
+     object.req = req;
+     object.res = res;
+     console.log("Inside destego, object created!");
+     imageToBits(object)
+    .then(grabHeader)
+    .then(grabData)
+    .then(sendResponseDestego)
+}
+
+// -----------------------------------ENCRYPTION DECRYPTION FUNCTIONS
+//Encryption using AES
+function encrypt(text,password){
+  var cipher = crypto.createCipher(algorithm,password)
+  var crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
+ 
+//Encryption using AES
+function decrypt(text,password){
+  var decipher = crypto.createDecipher(algorithm,password)
+  var dec = decipher.update(text,'hex','utf8')
+  dec += decipher.final('utf8');
+  return dec;
+}
 
 // -----------------------------------HELPER FUNCTIONS ----------------------//
 
+//Conversion from string to binary
 function stringToBinary(string) {
     var data = new Buffer(string);
 
@@ -180,7 +252,7 @@ function stringToBinary(string) {
 
 }
 
-//helper functions
+//Convert a whole file to binary
 function fileToBinary(filePath) {
     //Read the file into a buffer
     var data = fs.readFileSync(filePath);
@@ -208,6 +280,7 @@ function fileToBinary(filePath) {
 
 
 
+//Craft the header
 function craftHeader(type, object) {
     switch (type) {
         case "text":
@@ -217,6 +290,7 @@ function craftHeader(type, object) {
     }
 }
 
+//For a given pixel colour value, flip the LSB
 function flipBit(colour, embedData, counter) {
     //Convert the current red value to binary
     var currentValue = ayb.decToBin(colour)
@@ -237,14 +311,35 @@ function flipBit(colour, embedData, counter) {
 }
 
 
+//Convert image to bits
+function imageToBits(object) {
+    var coverImagePath = object.req.writeFilePath;
+    return new Promise(function(resolve, reject) {
+        var bitArray = new Array();
+        //Go through each pixels
+        var image = new Jimp(coverImagePath, function(err, image) {
+            image.scan(0, 0, image.bitmap.width, image.bitmap.height, function(x, y, idx) {
+                var red = zfill(ayb.decToBin(this.bitmap.data[idx]), 8);
+                //console.log(red)
+                bitArray.push(red[7]);
+                var green = zfill(ayb.decToBin(this.bitmap.data[idx + 1]), 8);
+                //console.log(green)
+                bitArray.push(green[7]);
+                var blue = zfill(ayb.decToBin(this.bitmap.data[idx + 2]), 8);
+                //console.log(blue)
+                bitArray.push(blue[7]);
+            })
+            object.req.binaryString = bitArray.join("");
+            resolve(object)
 
-// module.exports = function(coverImagePath){
-//      imageToBits(coverImagePath)
-//     .then(grabHeader)
-//     .then(grabData)
-// }
+        })
+    })
+}
 
-function grabHeader(binaryString) {
+
+//When decrypting, grab the header
+function grabHeader(object) {
+    var binaryString = object.req.binaryString;
     return new Promise(function(resolve, reject) {
         console.log("BinaryString " + binaryString.slice(0, 100))
         var resultsArray = new Array()
@@ -262,37 +357,24 @@ function grabHeader(binaryString) {
             length: rawData[1],
             text: rawData[2]
         })
-        resolve(returnObj)
+        
+        object.req.returnObj = returnObj;
+        resolve(object)
 
 
     })
 }
 
-function grabData(returnObj) {
-    if (returnObj.type == "text") {
+//When decrypting grab the data
+function grabData(object) {
+    var returnObj = object.req.returnObj;
+    return new Promise(function(resolve,reject){
+        if (returnObj.type == "text") {
         console.log("Data is: " + returnObj.text)
-        return returnObj.text
-    }
-}
-
-function imageToBits(coverImagePath) {
-    return new Promise(function(resolve, reject) {
-        var bitArray = new Array();
-        //Go through each pixels
-        var image = new Jimp(coverImagePath, function(err, image) {
-            image.scan(0, 0, image.bitmap.width, image.bitmap.height, function(x, y, idx) {
-                var red = zfill(ayb.decToBin(this.bitmap.data[idx]), 8);
-                //console.log(red)
-                bitArray.push(red[7]);
-                var green = zfill(ayb.decToBin(this.bitmap.data[idx + 1]), 8);
-                //console.log(green)
-                bitArray.push(green[7]);
-                var blue = zfill(ayb.decToBin(this.bitmap.data[idx + 2]), 8);
-                //console.log(blue)
-                bitArray.push(blue[7]);
-            })
-            resolve(bitArray.join(""))
-
-        })
+        //DECRYPT HERE
+        object.req.data = decrypt(returnObj.text,object.req.body.decryptionKey)
+        //object.req.data =returnObj.text;
+        resolve(object)
+        }
     })
 }

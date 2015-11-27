@@ -189,7 +189,7 @@
                                             </form>
                                             <div>
                                                 <label class="control-label col-sm-2" for="img">Select image to stego:</label>
-                                                <input type="file" id="image">
+                                                <input type="file" id="enImage">
                                             </div>
                                             <!-- Check Button -->
                                             <div class="col-sm-12">
@@ -215,7 +215,7 @@
                                             </form>
                                             <div>
                                                 <label class="control-label col-sm-2" for="img">Selected stego image:</label>
-                                                <input type="file" id="image">
+                                                <input type="file" id="deImage">
                                             </div>
                                             <!-- Submit Button -->
                                             <div class="col-sm-12">
@@ -305,7 +305,7 @@
                             return;
                         }
                     
-                        input = document.getElementById('image');
+                        input = document.getElementById('enImage');
                         if (!input) {
                             window.alert("We couldn't find the fileinput element.");
                         }
@@ -375,7 +375,7 @@
                         return;
                     }
                 
-                    input = document.getElementById('image');
+                    input = document.getElementById('deImage');
                     if (!input) {
                         window.alert("We couldn't find the fileinput element.");
                     }
@@ -401,12 +401,12 @@
                                 console.log(response)
                                 
                                 $("#decryptMsg").removeClass('hidden');
-                                $('#decryptCiphertext').append(response.text);
+                                $('#decryptCiphertext').append(response.plaintext);
                             }
                         }
                     }
                     //REQUIRES CHANGE OF POST DESTINATION!
-                    request.open("POST","stego/decrypt")
+                    request.open("POST","/stego/decrypt")
                     request.send(formData)
                 });
                 
