@@ -17,7 +17,7 @@ Installation / Run Instructions
  2. The above should also install NPM (Node Package Manager) but just in case, install npm `sudo apt-get install npm`
  3. Clone the repository `git clone https://github.com/tratnayake/7615FinalProject`
  4. Install required dependancies `npm start`
- 5. Run the web-app `DEBUG=test:* npm start`
+ 5. Run the server with command "DEBUG=test:* npm start" for Linux and "set DEBUG=myapp:* & npm start" on Windows
  6. Visit `http://localhost:8080` in the browser to use the app
 
 Work-Breakdown
